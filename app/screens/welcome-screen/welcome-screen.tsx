@@ -3,6 +3,7 @@ import { View, Image, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "rea
 import { NavigationScreenProps } from "react-navigation"
 import { Button, Header, Screen, Text, Wallpaper } from "../../components"
 import { color, spacing } from "../../theme"
+import { Button as Btn2 } from 'react-native-elements'
 const bowserLogo = require("./bowser.png")
 
 const FULL: ViewStyle = { flex: 1 }
@@ -104,6 +105,8 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
       </Screen>
       <SafeAreaView style={FOOTER}>
         <View style={FOOTER_CONTENT}>
+
+          <Btn2 title="Hello Ignite" />
           <Button
             testID="next-screen-button"
             style={CONTINUE}
