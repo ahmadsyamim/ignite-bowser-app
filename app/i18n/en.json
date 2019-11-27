@@ -12,6 +12,10 @@
     "readyForLaunch": "Ready for launch.",
     "continue": "CONTINUE"
   },
+  "loginScreen": {
+    "header": "Login"
+
+  },
   "demoScreen": {
     "howTo": "HOW TO",
     "title": "What’s In This Stack?",

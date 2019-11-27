@@ -82,6 +82,10 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
     props.navigation,
   ])
 
+  const loginScreen = React.useMemo(() => () => props.navigation.navigate("loginScreen"), [
+    props.navigation,
+  ])
+
   return (
     <View testID="WelcomeScreen" style={FULL}>
       <Wallpaper />
@@ -106,7 +110,10 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
       <SafeAreaView style={FOOTER}>
         <View style={FOOTER_CONTENT}>
 
-          <Btn2 title="Hello Ignite" />
+          <Btn2 
+            title="Hello Ignite"
+            onPress={loginScreen} 
+          />
           <Button
             testID="next-screen-button"
             style={CONTINUE}
