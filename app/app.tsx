@@ -11,6 +11,9 @@ import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-stor
 import { contains } from "ramda"
 import { enableScreens } from "react-native-screens"
 
+import { mapping, light as lightTheme } from '@eva-design/eva';
+import { ApplicationProvider, Layout, Text } from 'react-native-ui-kitten';
+
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
 // https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
@@ -71,7 +74,9 @@ export const App: React.FunctionComponent<{}> = () => {
   return (
     <RootStoreProvider value={rootStore}>
       <BackButtonHandler canExit={canExit}>
-        <StatefulNavigator />
+        <ApplicationProvider mapping={mapping} theme={lightTheme}>
+          <StatefulNavigator />
+        </ApplicationProvider>
       </BackButtonHandler>
     </RootStoreProvider>
   )
