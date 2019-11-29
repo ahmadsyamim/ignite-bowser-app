@@ -1,7 +1,7 @@
-import { StyleProp, TextStyle } from 'react-native';
+import {StyleProp, TextStyle} from "react-native";
 
-import { SFC } from 'react';
-import { StackNavigationProp } from '@react-navigation/stack';
+import {SFC} from "react";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 export interface User {
   displayName: string;
@@ -11,17 +11,18 @@ export interface User {
 
 type StackParamList = {
   default: undefined;
-  Intro: { userId: string };
+  Intro: {
+    userId: string
+  };
   Temp: undefined;
+  Splash: undefined;
 };
 
-export type DefaultNavigationProps<
-  T extends keyof StackParamList
-> = StackNavigationProp<StackParamList, T>;
+export type DefaultNavigationProps < T extends keyof StackParamList > =StackNavigationProp<StackParamList, T>;
 
 export enum ThemeType {
-  LIGHT = 'LIGHT',
-  DARK = 'DARK',
+  LIGHT = "LIGHT",
+  DARK = "DARK"
 }
 
 interface IconProps {
