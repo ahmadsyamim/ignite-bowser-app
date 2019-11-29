@@ -1,15 +1,23 @@
 module.exports = {
-  presets: ["module:metro-react-native-babel-preset", "module:react-native-dotenv"],
-  env: {
-    production: {},
-  },
+  presets: [
+    'module:metro-react-native-babel-preset',
+    '@babel/preset-typescript',
+  ],
+  sourceMaps: 'inline',
   plugins: [
     [
-      "@babel/plugin-proposal-decorators",
+      '@babel/plugin-proposal-decorators',
       {
         legacy: true,
       },
     ],
-    ["@babel/plugin-proposal-optional-catch-binding"],
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        helpers: true,
+        regenerator: false,
+      },
+    ],
+    '@babel/proposal-object-rest-spread',
   ],
-}
+};

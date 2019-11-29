@@ -1,4 +1,9 @@
 {
-  "name": "jin_app",
-  "displayName": "jin_app"
+  "name": "dooboo",
+  "displayName": "dooboo",
+  "entryPoint": "index.js",
+  "packagerOpts": {
+    "assetExts": ["ttf", "png"],
+    "sourceExts": ["ts", "tsx"]
+  }
 }

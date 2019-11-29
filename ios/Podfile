@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'jin_app' do
-  # Pods for jin_app
+target 'doobooApp' do
+  # Pods for doobooApp
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,8 +34,7 @@ target 'jin_app' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-
-  target 'jin_appTests' do
+  target 'doobooAppTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -43,10 +42,10 @@ target 'jin_app' do
   use_native_modules!
 end
 
-target 'jin_app-tvOS' do
-  # Pods for jin_app-tvOS
+target 'doobooApp-tvOS' do
+  # Pods for doobooApp-tvOS
 
-  target 'jin_app-tvOSTests' do
+  target 'doobooApp-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
