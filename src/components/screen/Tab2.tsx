@@ -4,8 +4,6 @@ import React from "react";
 import styled from "styled-components/native";
 import AsyncStorage from "@react-native-community/async-storage";
 import {CommonActions} from "@react-navigation/core";
-import * as NavigationService from "../navigation/NavigationService";
-import {StackActions} from "@react-navigation/routers";
 
 const Container = styled.View `
   flex: 1;
@@ -23,7 +21,7 @@ const authAction = CommonActions.reset({
   index: 0,
   routes: [
     {
-      name: "Splash"
+      name: "Intro"
     }
   ]
 });
@@ -32,7 +30,7 @@ const homeAction = CommonActions.reset({
   index: 0,
   routes: [
     {
-      name: "Splash"
+      name: "Temp"
     }
   ]
 });
@@ -41,16 +39,17 @@ function Page(props : Props): React.ReactElement {
   const logout = async () => {
     try {
       await AsyncStorage.removeItem("user_token");
-      NavigationService.navigate("Splash", {});
-
       try {
         const value = await AsyncStorage.getItem("user_token");
-        console.log("Current token: ", value);
         if (value !== null) {
           // value previously stored
-        } else {}
+          props.navigation.dispatch(homeAction);
+        } else {
+          props.navigation.dispatch(authAction);
+        }
       } catch (e) {
         // error reading value
+        props.navigation.dispatch(authAction);
       }
     } catch (e) {
       // remove error
@@ -61,6 +60,9 @@ function Page(props : Props): React.ReactElement {
 
   return (<Container>
     <Button testID="btn" onClick={() : void => props.navigation.goBack()} text="Go Back" style={{
+        backgroundColor: "#333333"
+      }}/>
+    <Button testID="btn" onClick={() => logout()} text="Logout" style={{
         backgroundColor: "#333333"
       }}/>
   </Container>);

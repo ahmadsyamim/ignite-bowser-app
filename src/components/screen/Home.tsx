@@ -3,7 +3,6 @@ import {DefaultNavigationProps, User} from "../../types";
 import Button from "../shared/Button";
 import {IC_MASK} from "../../utils/Icons";
 import React from "react";
-// import {View} from "react-native";
 import {getString} from "../../../STRINGS";
 import styled from "styled-components/native";
 import {useAppContext} from "../../providers/AppProvider";
@@ -23,6 +22,15 @@ import {
 } from "@shoutem/ui";
 import {CommonActions} from "@react-navigation/core";
 import AsyncStorage from "@react-native-community/async-storage";
+
+const resetAction = CommonActions.reset({
+  index: 0,
+  routes: [
+    {
+      name: "Temp"
+    }
+  ]
+});
 
 const ContainerFull = styled.View `
   flex: 1;
@@ -69,14 +77,14 @@ const Container = styled.View `
 `;
 
     interface Props {
-      navigation: DefaultNavigationProps<"Splash">;
+      navigation: DefaultNavigationProps<"Home">;
     }
 
     const authAction = CommonActions.reset({
       index: 0,
       routes: [
         {
-          name: "Login"
+          name: "Intro"
         }
       ]
     });
@@ -90,7 +98,7 @@ const Container = styled.View `
       ]
     });
 
-    function Splash(props : Props): React.ReactElement {
+    function Home(props : Props): React.ReactElement {
       let timer: number;
       const {state, setUser} = useAppContext();
       const {changeThemeType} = useThemeContext();
@@ -111,10 +119,10 @@ const Container = styled.View `
             props.navigation.dispatch(authAction);
           }
           clearTimeout(timer);
-        }, 2000);
+        }, 5000);
       };
 
-      getData();
+      // getData();
 
       return (<Screen>
         <ContainerFull>
@@ -125,4 +133,4 @@ const Container = styled.View `
       </Screen>);
     }
 
-    export default Splash;
+    export default Home;

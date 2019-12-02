@@ -60,7 +60,7 @@ function Page(props : Props): React.ReactElement {
   };
 
   return (<Container>
-    <Button testID="btn" onClick={() : void => props.navigation.goBack()} text="Go Back" style={{
+    <Button testID="btn" onClick={() => logout()} text="Logout" style={{
         backgroundColor: "#333333"
       }}/>
   </Container>);

@@ -12,10 +12,14 @@ export interface User {
 type StackParamList = {
   default: undefined;
   Intro: {
-    userId: string
+    userId: string;
   };
+  Login: undefined;
+  Register: undefined;
   Temp: undefined;
   Splash: undefined;
+  Home: undefined;
+  Tab: undefined;
 };
 
 export type DefaultNavigationProps < T extends keyof StackParamList > =StackNavigationProp<StackParamList, T>;

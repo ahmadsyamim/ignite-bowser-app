@@ -3,7 +3,7 @@ import {DefaultNavigationProps, User} from "../../types";
 import Button from "../shared/Button";
 import {IC_MASK} from "../../utils/Icons";
 import React from "react";
-// import {View} from "react-native";
+import {View} from "react-native";
 import {getString} from "../../../STRINGS";
 import styled from "styled-components/native";
 import {useAppContext} from "../../providers/AppProvider";
@@ -14,28 +14,27 @@ import {
   NavigationBar,
   Icon,
   Title,
-  Spinner,
-  Text,
-  View,
-  Screen,
   Image,
-  ImageBackground
+  Spinner,
+  Text
 } from "@shoutem/ui";
-import {CommonActions} from "@react-navigation/core";
-import AsyncStorage from "@react-native-community/async-storage";
 
-const ContainerFull = styled.View `
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #cccccc;
-`;
+import {CommonActions} from "@react-navigation/core";
+
+const resetAction = CommonActions.reset({
+  index: 0,
+  routes: [
+    {
+      name: "Tab"
+    }
+  ]
+});
 
 const Container = styled.View `
   flex: 1;
   align-self: stretch;
   overflow: scroll;
+  padding-top: 50;
   background-color: ${ ({
   theme}): string => theme.background};
 
@@ -69,60 +68,53 @@ const Container = styled.View `
 `;
 
     interface Props {
-      navigation: DefaultNavigationProps<"Splash">;
+      navigation: DefaultNavigationProps<"Login">;
     }
 
-    const authAction = CommonActions.reset({
-      index: 0,
-      routes: [
-        {
-          name: "Login"
-        }
-      ]
-    });
-
-    const homeAction = CommonActions.reset({
-      index: 0,
-      routes: [
-        {
-          name: "Home"
-        }
-      ]
-    });
-
-    function Splash(props : Props): React.ReactElement {
+    function Intro(props : Props): React.ReactElement {
       let timer: number;
       const {state, setUser} = useAppContext();
       const {changeThemeType} = useThemeContext();
       const [isLoggingIn, setIsLoggingIn] = React.useState<boolean>(false);
 
-      const getData = async () => {
-        timer = setTimeout(async () => {
-          try {
-            const value = await AsyncStorage.getItem("user_token");
-            if (value !== null) {
-              // value previously stored
-              props.navigation.dispatch(homeAction);
-            } else {
-              props.navigation.dispatch(authAction);
-            }
-          } catch (e) {
-            // error reading value
-            props.navigation.dispatch(authAction);
-          }
+      const onLogin = () : void => {
+        setIsLoggingIn(true);
+        timer = setTimeout(() => {
+          const user: User = {
+            displayName: "dooboolab",
+            age: 30,
+            job: "developer"
+          };
+          setUser(user);
+          setIsLoggingIn(false);
+          props.navigation.dispatch(resetAction);
           clearTimeout(timer);
-        }, 2000);
+        }, 1000);
       };
 
-      getData();
-
-      return (<Screen>
-        <ContainerFull>
-          <Image styleName="medium" source={{
+      return (<Container>
+        <ContentWrapper>
+          <Image styleName="medium" style={{
+              marginBottom: 20
+            }} source={{
               uri: "https://shoutem.github.io/img/ui-toolkit/examples/image-3.png"
             }}/>
-        </ContainerFull>
-      </Screen>);
+          <TextInput placeholder={"Email"}
+            // onChangeText={}
+          />
+          <TextInput placeholder={"Password"} secureTextEntry={true}/>
+          <Btn styleName="secondary" style={{
+              marginTop: 20
+            }} onPress={() : void => props.navigation.dispatch(resetAction)}>
+            <Text>Login</Text>
+          </Btn>
+          <Btn styleName="secondary" style={{
+              marginTop: 20
+            }} onPress={() : void => props.navigation.navigate("Register")}>
+            <Text>Register</Text>
+          </Btn>
+        </ContentWrapper>
+      </Container>);
     }
 
-    export default Splash;
+    export default Intro;
